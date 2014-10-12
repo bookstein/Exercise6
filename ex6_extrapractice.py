@@ -1,29 +1,27 @@
-# import file
+def create_dictionary(filename):
+	listings = {}
 
-score_file = open("scores.txt")
+	f = open(filename)
+	for line in f:
+		restaurant, rating = line.strip().split(":")
+		listings[restaurant] = int(rating)
 
-#create empty dictionary
-restaurant_ratings = {}
+	return listings
 
-#iterate file, line by line
-for line in score_file:
-	# remove ending \n from file, save as line
-	line = line.rstrip()
-	# each file line becomes a list called ratings
-	ratings = line.split(":")
+def sort_by_alphabet(dictionary):
+	for key in sorted(dictionary.keys()):
+		print "Restaurant %s is rated: %d" % (key, dictionary[key])
 
-	# put into dict using key assignment
-	for restaurant in ratings:
-		restaurant_ratings[ratings[0]] = int(ratings[1])
+def sort_by_rating(dictionary):
+	ratings_list = dictionary.items()
+	ratings_list.sort(key = lambda x: x[1], reverse = True)
+	print ratings_list
 
-#alphabetize (sort) a list of keys
-restaurant_list = restaurant_ratings.keys()
-restaurant_list.sort()
-
-# print in a for loop over the list of restaurant keys
-	# use the key to get to the corresponding value in dict
-for restaurant in restaurant_list:
-	print "Restaurant %s is rated at %d" % (restaurant, restaurant_ratings[restaurant])
+def main():
+	listings = create_dictionary("scores.txt")
+	sort_alphabet = sort_by_alphabet(listings)
+	sort_ratings = sort_by_rating(listings)
 
 
-# this took about 15 minutes. 10/7
+if __name__ == "__main__":
+	main()
