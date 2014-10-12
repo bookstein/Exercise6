@@ -15,7 +15,9 @@ def sort_by_alphabet(dictionary):
 def sort_by_rating(dictionary):
 	ratings_list = dictionary.items()
 	ratings_list.sort(key = lambda x: x[1], reverse = True)
-	print ratings_list
+
+	for listing in ratings_list:
+		print listing
 
 def main():
 	listings = create_dictionary("scores.txt")
